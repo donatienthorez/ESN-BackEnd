@@ -40,7 +40,26 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
                  }
              }
          }
-         
-         
-     }
+     };
+     $scope.changeCategorieName = function(id,name)
+     {
+		Categories.updateName(id,name).success(function(resp){
+			Categories.fetch().success(function(resp){
+			$scope.categories = resp.categories;
+			});
+		});
+	 };
+	 
+	 $scope.changeCategorieContent = function(id,content)
+     {
+		Categories.updateContent(id,content).success(function(resp){
+			Categories.fetch().success(function(resp){
+			$scope.categories = resp.categories;
+			});
+		});
+	 };
+     
+		 
 });
+
+

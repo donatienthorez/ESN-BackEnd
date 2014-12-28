@@ -3,8 +3,8 @@
 class Category{
 
         public $id;
-	public $name;
-	public $section;
+	    public $name;
+	    public $section;
         public $content;
         
         public $categories;

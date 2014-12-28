@@ -12,6 +12,33 @@ class CategoryModel{
         $this->database=$database;
         $this->connexion=$database->connexion;
     }
+    
+    function updateNameCategories($id,$name)
+    {
+		try{
+			$stmt = $this->connexion->prepare("UPDATE categories SET name=:name WHERE idCategorie=:idCategorie");
+			$stmt->bindParam(':name',$name);
+			$stmt->bindParam(':idCategorie',$id);
+			$stmt->execute();
+		}
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+	}
+	function updateContentCategories($id,$content)
+    {
+		try{
+			$stmt = $this->connexion->prepare("UPDATE categories SET content=:content WHERE idCategorie=:idCategorie");
+			$stmt->bindParam(':content',$content);
+			$stmt->bindParam(':idCategorie',$id);
+			$stmt->execute();
+		}
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+	}
 
     function getCategories($section)
     {

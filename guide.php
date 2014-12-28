@@ -2,6 +2,7 @@
 	<div class="subnavbar-inner">
 			<div class="container">
 			  <div class="mainnav">
+				  
 			  </div>
 			</div>
 			  
@@ -29,11 +30,11 @@
 					<div class="widget">
 						<div class="widget-header"> 
 							<i class="icon-book"></i>
-							<h3> {{ categorie.name }} </h3>
+							<h3 editable-text="categorie.name" onaftersave="changeCategorieName(categorie.id,categorie.name)"> {{ categorie.name }} </h3>
 						</div>
 						<div class="widget-content">	
-							<div ng-if="categorie.content">
-							{{ categorie.content }}
+							<div ng-if="categorie.content" editable-textarea="categorie.content" e-rows="7" e-cols="50" onaftersave="changeCategorieContent(categorie.id,categorie.content)">
+							<pre>{{ categorie.content }}</pre>
 							</div>
 							<div ng-if="!categorie.content">
 								<ul ng-repeat="categorie2 in categorie.categories">
