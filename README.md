@@ -5,7 +5,7 @@ Cet outil permet de faire fonctionner la partie Guide de l'application smartphon
 
 Ce back-office permet à un membre de l'association ESN, d'ajouter, modifier et supprimer des éléments dans le guide. 
 
-Le bloc de gauche permet de naviguer dans l'arborescence du guide. Pour modifier une catégorie il suffit juste de cliquer sur son nom ou sur son contenu dans le bloc de droite.
+Le bloc de gauche permet de naviguer dans l'arborescence du guide. Pour modifier une catégorie il suffit juste de cliquer sur le bouton 'edit'.
 
 ===========
 Comment faire fonctionner le projet sur votre machine :
