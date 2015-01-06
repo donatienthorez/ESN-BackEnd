@@ -15,10 +15,11 @@
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
       <link href="css/font-awesome.css" rel="stylesheet">
-      <link href="css/style.css" rel="stylesheet">
+      
       <link href="css/pages/signin.css" rel="stylesheet">
 
       <link href="css/xeditable.css" rel="stylesheet">
+      <link href="css/style.css" rel="stylesheet">
       
       <script src="js/jquery-1.7.2.min.js"></script> 
       <script src="js/bootstrap.js"></script>
@@ -28,7 +29,7 @@
       <script src="js/angularApp/controllers.js"></script>
       <script src="js/angularApp/services.js"></script>
 
-      <script src="js/xeditable.min.js"></script>
+      <script src="js/xeditable.js"></script>
 </head>
 
 <body>

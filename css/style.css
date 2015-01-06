@@ -270,6 +270,15 @@ margin-right: 5px;
 }
 
 
+textarea {
+	width: 100%;
+    resize: none;
+}
+
+input {
+height:25px;
+}
+
 
 /*------------------------------------------------------------------
 [6. Footer/ .footer]
@@ -1246,6 +1255,4 @@ color: #333;
 	.navbar .search-query {
 		width: 200px;
 	}
-	
 }
-

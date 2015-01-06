@@ -10,7 +10,7 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
     
      $scope.getCategorie = function(id)
      {
-                 
+                
          var index,index2,index3;
          for(index=0; index<$scope.categories.length;++index)
          {
