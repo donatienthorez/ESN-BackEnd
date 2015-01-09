@@ -58,6 +58,17 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
 			});
 		});
 	 };
+	 
+	 $scope.deleteCategory = function(id)
+     {
+		Categories.del(id).success(function(resp){
+			Categories.fetch().success(function(resp){
+			$scope.categories = resp.categories;
+			});
+		});
+		window.location.reload();
+	 };
+	 
      
 		 
 });

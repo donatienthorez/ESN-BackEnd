@@ -2,11 +2,11 @@
 	<div class="subnavbar-inner">
 			<div class="container">
 			  <div class="mainnav">
-				  
+				  <button data-toggle="modal" href="modal.html" class="btn btn-primary ng-scope" bs-modal="modal.html">
+					  Ajouter une categorie</button>
 			  </div>
-			</div>
 			  
-			<div class="container"  ng-controller="categoriesController">
+			<div ng-controller="categoriesController">
 				<div class="span5">
 					<div class="widget">
 						<div class="widget-header"> 
@@ -26,9 +26,10 @@
 						</div>
 					</div>
 				</div>
-				<form editable-form name="editableForm">
-				<div class="span6">
+				<div class="span5">
+				
 					<div class="widget">
+						<form editable-form name="editableForm">
 						<div class="widget-header"> 
 							<i class="icon-book"></i>
 							
@@ -43,20 +44,26 @@
 							  </h3>
 						  
 						  
-						  
-							  <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-								Edit
-							  </button>
-							  <!-- buttons to submit / cancel form -->
-							  <span ng-show="editableForm.$visible">
-								<button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-								  Save
-								</button>
-								<button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-								  Cancel
-								</button>
+						  	  <span ng-if="categorie.name">	
+								  <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+									Edit
+								  </button>
+								  <!-- buttons to submit / cancel form -->
+								  <span ng-show="editableForm.$visible">
+									<button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+									  Save
+									</button>
+									<button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+									  Cancel
+									</button>
+								  </span>
+								  <button type="button" class="btn btn-default" ng-click="deleteCategory(categorie.id);">
+									Delete
+								  </button>
 							  </span>
 						</div>
+						<!-- end widget head -->
+
 						<div class="widget-content">	
 							<div ng-if="categorie.content" editable-textarea="categorie.content" e-form="contentBtnForm" e-rows="7" e-cols="50"  onaftersave="changeCategorieContent(categorie.id,categorie.content)">
 							<pre>{{ categorie.content }}</pre>
@@ -67,10 +74,14 @@
 								</ul>
 							</div>
 						</div>
-							
+						<!-- end widget content -->
+						</form>
+						
 					</div>
+					<!-- end widget -->
 				</div>
-				</form>
+				<!-- end span 5 -->
+			</div>
 			</div>
 		</div>
 	</div>

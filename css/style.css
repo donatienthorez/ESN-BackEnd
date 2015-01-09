@@ -142,9 +142,9 @@ margin-right: 5px;
 
 .subnavbar .container > div.mainnav {
 	display: inline-block;
-	
-	height: 80px;
-	padding: 0;
+	padding-left:30px;
+	padding-top:15px;
+	height: 55px;
 	margin: 0;
 	
 }

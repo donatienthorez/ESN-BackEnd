@@ -13,6 +13,95 @@ class CategoryModel{
         $this->connexion=$database->connexion;
     }
     
+    
+    
+    function addCategory($parent,$category)
+    {
+		try{
+			$stmt = $this->connexion->prepare("INSERT INTO categories(name,content,code_section) VALUES (:name,:content,:code_section)");
+			$stmt->bindParam(':name',$category->name);
+			$stmt->bindParam(':content',$category->content);
+			$stmt->bindParam(':code_section',$category->section);
+			$stmt->execute();
+			
+			$id = $this->connexion->lastInsertId();
+			echo 'id:' . $id; 
+			
+			if($parent == 0)
+			{
+				$partie=0;
+				$chapitre=0;
+			}
+			else 
+			{
+				
+				$stmt = $this->connexion->prepare("SELECT * from relation WHERE idCategorie=:id");
+				$stmt->bindParam(':id',$parent);
+				$stmt->execute();
+				
+				$data=$stmt->fetch(PDO::FETCH_OBJ);
+				if($data){
+				
+					if($data->chapitre == 0){
+					
+						if($data->partie == 0)
+						{
+							$partie=$data->idCategorie;
+							$chapitre=0;
+						}
+						else
+						{
+							$partie=$data->partie;
+							$chapitre=$data->idCategorie;
+						}
+					}
+					else
+					{
+						throw new Exception('The category you want to add are too deep');
+					}
+				}
+				else
+				{
+					throw new Exception('The parent category doesn\' exist');
+				}
+			}
+			
+			$stmt = $this->connexion->prepare("INSERT INTO relation(idCategorie,partie,chapitre) VALUES (:id,:partie,:chapitre)");
+			$stmt->bindParam(':id',$id);
+			$stmt->bindParam(':partie',$partie);
+			$stmt->bindParam(':chapitre',$chapitre);
+			$stmt->execute();
+			
+			
+		}
+        catch (Exception $e)
+        {
+            if($id!=0)
+            {
+				$this->deleteCategory($id);
+			}
+            die('Erreur : ' . $e->getMessage());
+        }
+	}
+	
+	function deleteCategory($id)
+	{
+		try{
+			
+			$stmt = $this->connexion->prepare("DELETE FROM relation WHERE idCategorie=:idCategorie");
+			$stmt->bindParam(':idCategorie',$id);
+			$stmt->execute();
+			
+			$stmt = $this->connexion->prepare("DELETE FROM categories WHERE idCategorie=:idCategorie");
+			$stmt->bindParam(':idCategorie',$id);
+			$stmt->execute();
+		}
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+	}
+    
     function updateNameCategories($id,$name)
     {
 		try{
