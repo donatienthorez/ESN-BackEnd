@@ -49,24 +49,34 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
 			});
 		});
 	 };
-	 
-	 $scope.changeCategorieContent = function(id,content)
+
+     $scope.addCategory = function(name,content,parent)
      {
+		if(parent==null)
+		{
+			parent=0;
+		}
+		Categories.add(name,content,parent).success(function(resp){
+			
+			window.location.reload();
+		});
+	 };
+	 
+      $scope.changeCategorieContent = function(id,content)
+      {
 		Categories.updateContent(id,content).success(function(resp){
 			Categories.fetch().success(function(resp){
 			$scope.categories = resp.categories;
 			});
 		});
-	 };
+       };
 	 
 	 $scope.deleteCategory = function(id)
-     {
+     	{
 		Categories.del(id).success(function(resp){
-			Categories.fetch().success(function(resp){
-			$scope.categories = resp.categories;
-			});
+			window.location.reload();
+	
 		});
-		window.location.reload();
 	 };
 	 
      

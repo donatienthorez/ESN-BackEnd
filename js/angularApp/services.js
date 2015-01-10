@@ -3,6 +3,10 @@ myAdminApp.service("Categories",function ($http) {
    
     return {
         
+	add : function(name,content,parent) {
+	    console.log(parent);
+	    return $http.get("/ESN-BackEnd/addCategory.php",{params: { name:name, content:content, parent:parent}});
+	},
         fetch : function() {
             return $http.get("/ESN-BackEnd/getCategories.php");
         },
