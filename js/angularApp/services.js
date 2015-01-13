@@ -4,20 +4,20 @@ myAdminApp.service("Categories",function ($http) {
     return {
         
 	add : function(name,content,parent) {
-	    console.log(parent);
-	    return $http.get("/ESN-BackEnd/addCategory.php",{params: { name:name, content:content, parent:parent}});
+	    return $http.get("/ESN-BackEnd/includes/rest/addCategory.php",{params: { name:name, content:content, parent:parent}});
 	},
         fetch : function() {
-            return $http.get("/ESN-BackEnd/getCategories.php");
+            console.log("test");
+            return $http.get("/ESN-BackEnd/includes/rest/getCategories.php");
         },
         del : function(id) {
-            return $http.get("/ESN-BackEnd/deleteCategory.php",{params: { id:id}});
+            return $http.get("/ESN-BackEnd/includes/rest/deleteCategory.php",{params: { id:id}});
         },
         updateName : function(id,name) {
-            return $http.get("/ESN-BackEnd/updateNameCategories.php",{params: { id:id, name:name}});
+            return $http.get("/ESN-BackEnd/includes/rest/updateNameCategories.php",{params: { id:id, name:name}});
         },
         updateContent : function(id,content) {
-            return $http.get("/ESN-BackEnd/updateContentCategories.php",{params: { id:id, content:content}});
+            return $http.get("/ESN-BackEnd/includes/rest/updateContentCategories.php",{params: { id:id, content:content}});
         }
     };
 });

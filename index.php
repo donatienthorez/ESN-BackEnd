@@ -1,4 +1,4 @@
-<?php include 'session.php'; ?>
+<?php include 'includes/connection/session.php'; ?>
 <html ng-app="myAdminApp">
 <head>
       <meta charset="utf-8">
@@ -48,7 +48,7 @@
 			<ul class="nav pull-right">
 				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><?php echo $_SESSION['username'];?><b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					  <li><a href="logout.php">Logout</a></li>
+					  <li><a href="includes/connection/logout.php">Logout</a></li>
 				</ul>
 			  </li>
 			</ul>
@@ -61,11 +61,11 @@
 		<?php
 		if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 		{
-			include 'guide.php';
+			include 'includes/partials/guide.php';
 		}
 		else
 		{
-			include 'login.php';
+			include 'includes/partials/login.php';
 		}
 		?>
 	</div>
