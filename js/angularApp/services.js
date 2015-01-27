@@ -4,6 +4,7 @@ myAdminApp.service("Categories",function ($http) {
     return {
         
 	add : function(name,content,parent,position) {
+	    console.log("test");
 	    return $http.get("/ESN-BackEnd/includes/rest/addCategory.php",{params: { name:name, content:content, parent:parent, position:position}});
 	},
         fetch : function() {

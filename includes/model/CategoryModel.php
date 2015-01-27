@@ -59,13 +59,17 @@ class CategoryModel{
 					{
 						throw new Exception('The category you want to add are too deep');
 					}
+					$this->updateContentCategories($data->idCategorie,'',$category->section);
 				}
 				else
 				{
 					throw new Exception('The parent category doesn\' exist');
 				}
+				
 			}
 			
+			
+
 			$stmt = $this->connexion->prepare("INSERT INTO relation(idCategorie,partie,chapitre,position) VALUES (:id,:partie,:chapitre,:position)");
 			$stmt->bindParam(':id',$id);
 			$stmt->bindParam(':partie',$partie);
