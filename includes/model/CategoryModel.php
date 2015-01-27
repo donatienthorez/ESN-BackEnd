@@ -85,10 +85,41 @@ class CategoryModel{
         }
 	}
 	
-	function deleteCategory($id)
+	function deleteCategory($id,$code_section)
 	{
 		try{
+
+
+			// vérification des droits de suppression
+			$stmt = $this->connexion->prepare("SELECT idCategorie from categories WHERE idCategorie=:id and code_section=:code_section");
+            		$stmt->bindParam(':id',$id);
+            		$stmt->bindParam(':code_section',$code_section);
+            		$stmt->execute();
+			if(!($data=$stmt->fetch(PDO::FETCH_OBJ)))
+            		{
+				return;
+			}			
+
+
 			
+			$stmt = $this->connexion->prepare("SELECT idCategorie from relation WHERE relation.partie=:id OR relation.chapitre=:id");
+            		$stmt->bindParam(':id',$id);
+            		$stmt->execute();
+
+            
+		        while($data=$stmt->fetch(PDO::FETCH_OBJ))
+            		{
+				$stmt = $this->connexion->prepare("DELETE FROM relation WHERE idCategorie=:idCategorie");
+				$stmt->bindParam(':idCategorie',$data->idCategorie);
+				$stmt->execute();
+			
+				$stmt = $this->connexion->prepare("DELETE FROM categories WHERE idCategorie=:idCategorie");
+				$stmt->bindParam(':idCategorie',$data->idCategorie);
+				$stmt->execute();
+					
+			}
+
+
 			$stmt = $this->connexion->prepare("DELETE FROM relation WHERE idCategorie=:idCategorie");
 			$stmt->bindParam(':idCategorie',$id);
 			$stmt->execute();
@@ -103,11 +134,22 @@ class CategoryModel{
         }
 	}
     
-    function updatePositionCategories($id,$position)
+    function updatePositionCategories($id,$position,$code_section)
     {
 	try{
-		echo $id;
-		echo $position;
+
+		echo "test1";
+		// vérification des droits de suppression
+			$stmt = $this->connexion->prepare("SELECT idCategorie from categories WHERE idCategorie=:id and code_section=:code_section");
+            		$stmt->bindParam(':id',$id);
+            		$stmt->bindParam(':code_section',$code_section);
+            		$stmt->execute();
+			if(!($data=$stmt->fetch(PDO::FETCH_OBJ)))
+            		{
+				return;
+			}	
+
+		echo "test2";
 		$stmt = $this->connexion->prepare("UPDATE relation SET position=:position WHERE idCategorie=:idCategorie");
 		$stmt->bindParam(':position',$position);
 		$stmt->bindParam(':idCategorie',$id);
@@ -119,12 +161,13 @@ class CategoryModel{
         }
     }
 
-    function updateNameCategories($id,$name)
+    function updateNameCategories($id,$name,$code_section)
     {
 		try{
-			$stmt = $this->connexion->prepare("UPDATE categories SET name=:name WHERE idCategorie=:idCategorie");
+			$stmt = $this->connexion->prepare("UPDATE categories SET name=:name WHERE idCategorie=:idCategorie and code_section=:code_section");
 			$stmt->bindParam(':name',$name);
 			$stmt->bindParam(':idCategorie',$id);
+			$stmt->bindParam(':code_section',$code_section);
 			$stmt->execute();
 		}
         catch (Exception $e)
@@ -132,12 +175,13 @@ class CategoryModel{
             die('Erreur : ' . $e->getMessage());
         }
     }
-	function updateContentCategories($id,$content)
+	function updateContentCategories($id,$content,$code_section)
     {
 		try{
-			$stmt = $this->connexion->prepare("UPDATE categories SET content=:content WHERE idCategorie=:idCategorie");
+			$stmt = $this->connexion->prepare("UPDATE categories SET content=:content WHERE idCategorie=:idCategorie and code_section=:code_section");
 			$stmt->bindParam(':content',$content);
-			$stmt->bindParam(':idCategorie',$id);
+			$stmt->bindParam(':idCategorie',$id);			
+			$stmt->bindParam(':code_section',$code_section);
 			$stmt->execute();
 		}
         catch (Exception $e)
@@ -149,6 +193,8 @@ class CategoryModel{
     function getCategories($section)
     {
 	try{
+
+
             $stmt = $this->connexion->prepare("SELECT * from relation, categories WHERE code_section=:section and relation.idCategorie=categories.idCategorie order by partie ASC, chapitre ASC, position ASC");
             $stmt->bindParam(':section',$section);
             $stmt->execute();

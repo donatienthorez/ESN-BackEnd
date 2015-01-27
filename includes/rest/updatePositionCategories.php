@@ -17,7 +17,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 		$db = new Database("../database/config.xml");
 		$cs = new CategoryModel($db);
 		
-		$cs->updatePositionCategories($_GET['id'],utf8_decode($_GET['position']));
+		$cs->updatePositionCategories($_GET['id'],utf8_decode($_GET['position']),$_SESSION['code_section']);
 		echo "test";
 		
 	}

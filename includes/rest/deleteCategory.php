@@ -15,7 +15,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 	$db = new Database("../database/config.xml");
 	$cs = new CategoryModel($db);
 
-	$array = $cs->deleteCategory($_GET['id']);
+	$array = $cs->deleteCategory($_GET['id'],$_SESSION['code_section']);
 	}
 }
 else

@@ -101,9 +101,28 @@
 										  Cancel
 										</button>
 									  </span>
-									  <button type="button" class="btn btn-default" ng-click="deleteCategory(categorie.id);">
-										Delete
-									  </button>
+
+									  <a href="#delete" role="button" class="btn btn-default" data-toggle="modal">Delete</a>
+
+									  <div id="delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h3 id="myModalLabel">Delete category</h3>
+										</div>
+										<div class="modal-body">
+											<div class="control-group">											
+												<label class="control-label" for="name">{{ categorie.name }}</label>
+												<div class="controls">
+													<p> Are you sure to delete this category (and this subcategory) ?
+												</div> <!-- /controls -->				
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button class="btn btn-primary" ng-click="deleteCategory(categorie.id);">Delete</button>
+											<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+										</div>
+									</div>
 								  </span>
 							</div>
 							<!-- end widget head -->

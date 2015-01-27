@@ -17,7 +17,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 		$db = new Database("../database/config.xml");
 		$cs = new CategoryModel($db);
 		
-		$cs->updateNameCategories($_GET['id'],utf8_decode($_GET['name']));
+		$cs->updateNameCategories($_GET['id'],utf8_decode($_GET['name']),$_SESSION['code_section']);
 		
 	}
 }
