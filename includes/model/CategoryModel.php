@@ -15,7 +15,7 @@ class CategoryModel{
     
     
     
-    function addCategory($parent,$category)
+    function addCategory($parent,$category,$position)
     {
 		try{
 			$stmt = $this->connexion->prepare("INSERT INTO categories(name,content,code_section) VALUES (:name,:content,:code_section)");
@@ -66,10 +66,11 @@ class CategoryModel{
 				}
 			}
 			
-			$stmt = $this->connexion->prepare("INSERT INTO relation(idCategorie,partie,chapitre) VALUES (:id,:partie,:chapitre)");
+			$stmt = $this->connexion->prepare("INSERT INTO relation(idCategorie,partie,chapitre,position) VALUES (:id,:partie,:chapitre,:position)");
 			$stmt->bindParam(':id',$id);
 			$stmt->bindParam(':partie',$partie);
 			$stmt->bindParam(':chapitre',$chapitre);
+			$stmt->bindParam(':position',$position);
 			$stmt->execute();
 			
 			
@@ -102,6 +103,22 @@ class CategoryModel{
         }
 	}
     
+    function updatePositionCategories($id,$position)
+    {
+	try{
+		echo $id;
+		echo $position;
+		$stmt = $this->connexion->prepare("UPDATE relation SET position=:position WHERE idCategorie=:idCategorie");
+		$stmt->bindParam(':position',$position);
+		$stmt->bindParam(':idCategorie',$id);
+		$stmt->execute();
+		}
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
     function updateNameCategories($id,$name)
     {
 		try{
@@ -114,7 +131,7 @@ class CategoryModel{
         {
             die('Erreur : ' . $e->getMessage());
         }
-	}
+    }
 	function updateContentCategories($id,$content)
     {
 		try{
@@ -132,7 +149,7 @@ class CategoryModel{
     function getCategories($section)
     {
 	try{
-            $stmt = $this->connexion->prepare("SELECT * from relation, categories WHERE code_section=:section and relation.idCategorie=categories.idCategorie order by partie ASC, chapitre ASC");
+            $stmt = $this->connexion->prepare("SELECT * from relation, categories WHERE code_section=:section and relation.idCategorie=categories.idCategorie order by partie ASC, chapitre ASC, position ASC");
             $stmt->bindParam(':section',$section);
             $stmt->execute();
 
@@ -140,7 +157,7 @@ class CategoryModel{
             
             while($data=$stmt->fetch(PDO::FETCH_OBJ))
             {
-                $c = new Category($data->idCategorie,$data->name,$data->code_section,$data->content);
+                $c = new Category($data->idCategorie,$data->name,$data->code_section,$data->content,$data->position);
                 
                 if ($data->partie == 0 && $data->chapitre == 0)
                 {

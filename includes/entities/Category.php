@@ -3,9 +3,10 @@
 class Category{
 
         public $id;
-	    public $name;
-	    public $section;
+	public $name;
+	public $section;
         public $content;
+	public $position;
         
         public $categories;
 
@@ -14,13 +15,14 @@ class Category{
             return $this->name . $this->section;
             
         }
-        function Category($id,$name,$section,$content)
+        function Category($id,$name,$section,$content,$position)
         {
             $this->categories = array();
             $this->id=utf8_encode($id);
             $this->name=utf8_encode($name);
             $this->section=utf8_encode($section);
             $this->content=utf8_encode($content);
+            $this->position=utf8_encode($position);
             
         }
         
@@ -35,7 +37,7 @@ class Category{
             {
                 if($value->id == $data->chapitre)
                 {
-                    $c = new Category($data->idCategorie,$data->name,$data->code_section,$data->content);
+                    $c = new Category($data->idCategorie,$data->name,$data->code_section,$data->content,$data->position);
                     $value->addCategoryToList($c);
                 }
             }

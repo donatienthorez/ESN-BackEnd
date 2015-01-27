@@ -11,20 +11,24 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`idCategorie`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
+
 --
--- Table structure for table `subcategories`
+-- Table structure for table `relation`
 --
 
 CREATE TABLE IF NOT EXISTS `relation` (
   `idCategorie` int(11) NOT NULL,
   `partie` int(11) NOT NULL,
   `chapitre` int(11) NOT NULL,
+  `position` float NOT NULL,
   UNIQUE KEY `idCategorie` (`idCategorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 --
--- Constraints for table `subcategories`
+-- Contraintes pour la table `relation`
 --
 ALTER TABLE `relation`
   ADD CONSTRAINT `relation_ibfk_1` FOREIGN KEY (`idCategorie`) REFERENCES `categories` (`idCategorie`);
+
 

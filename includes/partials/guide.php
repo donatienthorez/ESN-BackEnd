@@ -35,9 +35,16 @@
 									</select><br>
 								</div> <!-- /controls -->				
 							</div>
+							<div class="control-group">											
+								<label class="control-label" for="position">Position</label>
+								<div class="controls">
+									<input type="text" class="span5" id="position" ng-model="position">
+								</div> <!-- /controls -->				
+							</div>
+
                                                 </div>
                                                 <div class="modal-footer">
-                                                	<button class="btn btn-primary" ng-click="addCategory(name,content,parent);">Save</button>
+                                                	<button class="btn btn-primary" ng-click="addCategory(name,content,parent,position);">Save</button>
                                                 	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                                                 </div>
 					</div>
@@ -52,11 +59,11 @@
 							</div>
 							<div class="widget-content">
 								<ul ng-repeat="categorie in categories">
-									<a><li ng-click="getCategorie(categorie.id); editableForm.$cancel()">{{categorie.name}}</li></a>
+									<a class="categorie"><li ng-click="getCategorie(categorie.id); editableForm.$cancel()">{{categorie.name}}</li></a>
 									<ul ng-repeat="categorie2 in categorie.categories">
-										<a><li ng-click="getCategorie(categorie2.id); editableForm.$cancel()">{{categorie2.name}}</li></a>
+										<a class="categorie"><li ng-click="getCategorie(categorie2.id); editableForm.$cancel()">{{categorie2.name}}</li></a>
 										<ul ng-repeat="categorie3 in categorie2.categories">
-											<a><li ng-click="getCategorie(categorie3.id); editableForm.$cancel()">{{categorie3.name}}</li></a>
+											<a class="categorie"><li ng-click="getCategorie(categorie3.id); editableForm.$cancel()">{{categorie3.name}}</li></a>
 										<ul>
 									<ul>
 								</ul> 
@@ -101,13 +108,15 @@
 							</div>
 							<!-- end widget head -->
 
-							<div class="widget-content">	
+							<div class="widget-content">				
+								<span class="title">Position: </span>
+								<span editable-text="categorie.position" e-name="categorie.position" e-required onbeforesave="isInteger($data)" onaftersave="changeCategoriePosition(categorie.id,categorie.position)">{{ categorie.position || 'empty' }}</span>
 								<div ng-if="categorie.content" editable-textarea="categorie.content" e-form="contentBtnForm" e-rows="7" e-cols="50"  onaftersave="changeCategorieContent(categorie.id,categorie.content)">
 								<pre>{{ categorie.content }}</pre>
 								</div>
 								<div ng-if="!categorie.content">
-									<ul ng-repeat="categorie2 in categorie.categories">
-										<a><li ng-click="getCategorie(categorie2.id); editableForm.$cancel()">{{categorie2.name}}</li></a>
+									<ul ng-repeat="categorie2 in categorie.categories" class="listeCategories">
+										<a class="categorie"><li ng-click="getCategorie(categorie2.id); editableForm.$cancel()">{{categorie2.name}}</li></a>
 									</ul>
 								</div>
 							</div>

@@ -50,13 +50,13 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
 		});
 	 };
 
-     $scope.addCategory = function(name,content,parent)
+     $scope.addCategory = function(name,content,parent,position)
      {
 		if(parent==null)
 		{
 			parent=0;
 		}
-		Categories.add(name,content,parent).success(function(resp){
+		Categories.add(name,content,parent,position).success(function(resp){
 			
 			window.location.reload();
 		});
@@ -70,14 +70,34 @@ myAdminApp.controller("categoriesController" ,function ($scope, Categories) {
 			});
 		});
        };
+
+      $scope.changeCategoriePosition = function(id,position)
+      {
+		Categories.updatePosition(id,position).success(function(resp){
+			Categories.fetch().success(function(resp){
+			$scope.categories = resp.categories;
+			});
+		});
+       };
 	 
-	 $scope.deleteCategory = function(id)
-     	{
+       $scope.deleteCategory = function(id)
+       {
 		Categories.del(id).success(function(resp){
 			window.location.reload();
-	
 		});
-	 };
+	};
+     
+       $scope.isInteger = function(integer)
+       {
+	 if(isNaN(integer))
+	 {
+	 	return false;
+	 }
+	 else
+	 {
+		return true;
+	 }
+       }
 	 
      
 		 

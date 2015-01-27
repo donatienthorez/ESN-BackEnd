@@ -3,11 +3,10 @@ myAdminApp.service("Categories",function ($http) {
    
     return {
         
-	add : function(name,content,parent) {
-	    return $http.get("/ESN-BackEnd/includes/rest/addCategory.php",{params: { name:name, content:content, parent:parent}});
+	add : function(name,content,parent,position) {
+	    return $http.get("/ESN-BackEnd/includes/rest/addCategory.php",{params: { name:name, content:content, parent:parent, position:position}});
 	},
         fetch : function() {
-            console.log("test");
             return $http.get("/ESN-BackEnd/includes/rest/getCategories.php");
         },
         del : function(id) {
@@ -18,6 +17,9 @@ myAdminApp.service("Categories",function ($http) {
         },
         updateContent : function(id,content) {
             return $http.get("/ESN-BackEnd/includes/rest/updateContentCategories.php",{params: { id:id, content:content}});
+        },
+	updatePosition : function(id,position) {
+            return $http.get("/ESN-BackEnd/includes/rest/updatePositionCategories.php",{params: { id:id, position:position}});
         }
     };
 });

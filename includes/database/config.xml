@@ -1,7 +1,7 @@
 <config>
   <host>localhost</host>
   <user>root</user>
-  <pass></pass>
+  <pass>fei7eiqu</pass>
   <port>3306</port>
   <db>ESN_test</db>
 </config>

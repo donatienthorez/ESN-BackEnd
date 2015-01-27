@@ -8,14 +8,17 @@ include '../database/Database.php';
 include '../entities/Category.php';
 include '../model/CategoryModel.php';
 
+// TODO control that this user can modify this category
 
 if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
-{
-	if(isset($_GET['content']) && $_GET['content']!="" && isset($_GET['name']) && isset($_GET['parent']) && isset($_GET['position']))
+{	
+	if(isset($_GET['id']) && isset($_GET['position']) )
 	{
 		$db = new Database("../database/config.xml");
 		$cs = new CategoryModel($db);
-		$cs->addCategory($_GET['parent'],new Category(null,$_GET['name'],$_SESSION['code_section'],$_GET['content']),$_GET['position']);
+		
+		$cs->updatePositionCategories($_GET['id'],utf8_decode($_GET['position']));
+		echo "test";
 		
 	}
 }

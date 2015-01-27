@@ -25,9 +25,36 @@ textarea {
   font-family: 'Open Sans';
 }
 
+ul
+{
+list-style: none;
+cursor:hand;
+}
+
+ul.listeCategories
+{
+margin-left:0px;
+}
+
+.title
+{
+margin-top:-7px;
+}
+
+
+
+
 a {
 color:#19BCEC;
+text-decoration:none;
 }
+
+a.categorie:hover
+{
+color:#555555
+text-decoration:none;
+}
+
 
 .dropdown .dropdown-menu {
 	-webkit-border-radius: 6px;
