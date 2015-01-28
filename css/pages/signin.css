@@ -10,7 +10,7 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 
 
 .account-container {
-	width: 380px; 
+	width: 450px; 
 	display: block;
 	margin: 60px auto 0 auto;
 	
@@ -180,7 +180,7 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	text-decoration: none;
 }
 
-.button {-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; float: right; margin-top: 18px;}
+.button {-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; float: left; margin-top: 18px;}
 
 
 
@@ -217,6 +217,14 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	
 	line-height: 1.3em;
 }
+
+
+.btn-galaxy
+{
+	background-color:#ED008C;
+	vertical-align: middle;
+}
+
 
 
 
