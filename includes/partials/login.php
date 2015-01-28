@@ -19,11 +19,15 @@
 			 			
 			<div class="login-actions">
 													
+				
 				<button class="button btn btn-success btn-large">Sign In</button>
 				
 			</div>	
 			
 		</form>
+		<a href="login_galaxy.php">
+			<button class="button btn btn-success btn-medium">Connect with Galaxy</button>
+		</a>
 		
 	</div>
 </div>

@@ -1,8 +1,10 @@
 <?php
 	session_start();
 	
-	
+	ini_set('display_errors', 1);
+
 	include 'includes/database/Database.php';
+	include 'includes/connection/CAS.php';
 	
 	$db = new Database("includes/database/config.xml");
 	
