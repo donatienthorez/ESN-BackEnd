@@ -2,7 +2,7 @@
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
+CREATE TABLE IF NOT EXISTS `survival_guide_categories` (
   `idCategorie` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) CHARACTER SET utf8 NOT NULL,
   `content` text CHARACTER SET utf8 NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Table structure for table `relation`
 --
 
-CREATE TABLE IF NOT EXISTS `relation` (
+CREATE TABLE IF NOT EXISTS `survival_guide_relation` (
   `idCategorie` int(11) NOT NULL,
   `partie` int(11) NOT NULL,
   `chapitre` int(11) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `relation` (
 --
 -- Contraintes pour la table `relation`
 --
-ALTER TABLE `relation`
-  ADD CONSTRAINT `relation_ibfk_1` FOREIGN KEY (`idCategorie`) REFERENCES `categories` (`idCategorie`);
+ALTER TABLE `survival_guide_relation`
+  ADD CONSTRAINT `survival_guide_relation_ibfk_1` FOREIGN KEY (`idCategorie`) REFERENCES `survival_guide_categories` (`idCategorie`);
 
 

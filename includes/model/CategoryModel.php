@@ -18,7 +18,7 @@ class CategoryModel{
     function addCategory($parent,$category,$position)
     {
 		try{
-			$stmt = $this->connexion->prepare("INSERT INTO categories(name,content,code_section) VALUES (:name,:content,:code_section)");
+			$stmt = $this->connexion->prepare("INSERT INTO survival_guide_categories(name,content,code_section) VALUES (:name,:content,:code_section)");
 			$stmt->bindParam(':name',$category->name);
 			$stmt->bindParam(':content',$category->content);
 			$stmt->bindParam(':code_section',$category->section);
@@ -35,7 +35,7 @@ class CategoryModel{
 			else 
 			{
 				
-				$stmt = $this->connexion->prepare("SELECT * from relation WHERE idCategorie=:id");
+				$stmt = $this->connexion->prepare("SELECT * from survival_guide_relation WHERE idCategorie=:id");
 				$stmt->bindParam(':id',$parent);
 				$stmt->execute();
 				
@@ -70,7 +70,7 @@ class CategoryModel{
 			
 			
 
-			$stmt = $this->connexion->prepare("INSERT INTO relation(idCategorie,partie,chapitre,position) VALUES (:id,:partie,:chapitre,:position)");
+			$stmt = $this->connexion->prepare("INSERT INTO survival_guide_relation(idCategorie,partie,chapitre,position) VALUES (:id,:partie,:chapitre,:position)");
 			$stmt->bindParam(':id',$id);
 			$stmt->bindParam(':partie',$partie);
 			$stmt->bindParam(':chapitre',$chapitre);
@@ -95,7 +95,7 @@ class CategoryModel{
 
 
 			// vérification des droits de suppression
-			$stmt = $this->connexion->prepare("SELECT idCategorie from categories WHERE idCategorie=:id and code_section=:code_section");
+			$stmt = $this->connexion->prepare("SELECT idCategorie from survival_guide_categories WHERE idCategorie=:id and code_section=:code_section");
             		$stmt->bindParam(':id',$id);
             		$stmt->bindParam(':code_section',$code_section);
             		$stmt->execute();
@@ -106,29 +106,29 @@ class CategoryModel{
 
 
 			
-			$stmt = $this->connexion->prepare("SELECT idCategorie from relation WHERE relation.partie=:id OR relation.chapitre=:id");
+			$stmt = $this->connexion->prepare("SELECT idCategorie from survival_guide_relation WHERE relation.partie=:id OR relation.chapitre=:id");
             		$stmt->bindParam(':id',$id);
             		$stmt->execute();
 
             
 		        while($data=$stmt->fetch(PDO::FETCH_OBJ))
             		{
-				$stmt = $this->connexion->prepare("DELETE FROM relation WHERE idCategorie=:idCategorie");
+				$stmt = $this->connexion->prepare("DELETE FROM survival_guide_relation WHERE idCategorie=:idCategorie");
 				$stmt->bindParam(':idCategorie',$data->idCategorie);
 				$stmt->execute();
 			
-				$stmt = $this->connexion->prepare("DELETE FROM categories WHERE idCategorie=:idCategorie");
+				$stmt = $this->connexion->prepare("DELETE FROM survival_guide_categories WHERE idCategorie=:idCategorie");
 				$stmt->bindParam(':idCategorie',$data->idCategorie);
 				$stmt->execute();
 					
 			}
 
 
-			$stmt = $this->connexion->prepare("DELETE FROM relation WHERE idCategorie=:idCategorie");
+			$stmt = $this->connexion->prepare("DELETE FROM survival_guide_relation WHERE idCategorie=:idCategorie");
 			$stmt->bindParam(':idCategorie',$id);
 			$stmt->execute();
 			
-			$stmt = $this->connexion->prepare("DELETE FROM categories WHERE idCategorie=:idCategorie");
+			$stmt = $this->connexion->prepare("DELETE FROM survival_guide_categories WHERE idCategorie=:idCategorie");
 			$stmt->bindParam(':idCategorie',$id);
 			$stmt->execute();
 		}
@@ -144,7 +144,7 @@ class CategoryModel{
 
 		echo "test1";
 		// vérification des droits de suppression
-			$stmt = $this->connexion->prepare("SELECT idCategorie from categories WHERE idCategorie=:id and code_section=:code_section");
+			$stmt = $this->connexion->prepare("SELECT idCategorie from survival_guide_categories WHERE idCategorie=:id and code_section=:code_section");
             		$stmt->bindParam(':id',$id);
             		$stmt->bindParam(':code_section',$code_section);
             		$stmt->execute();
@@ -154,7 +154,7 @@ class CategoryModel{
 			}	
 
 		echo "test2";
-		$stmt = $this->connexion->prepare("UPDATE relation SET position=:position WHERE idCategorie=:idCategorie");
+		$stmt = $this->connexion->prepare("UPDATE survival_guide_relation SET position=:position WHERE idCategorie=:idCategorie");
 		$stmt->bindParam(':position',$position);
 		$stmt->bindParam(':idCategorie',$id);
 		$stmt->execute();
@@ -168,7 +168,7 @@ class CategoryModel{
     function updateNameCategories($id,$name,$code_section)
     {
 		try{
-			$stmt = $this->connexion->prepare("UPDATE categories SET name=:name WHERE idCategorie=:idCategorie and code_section=:code_section");
+			$stmt = $this->connexion->prepare("UPDATE survival_guide_categories SET name=:name WHERE idCategorie=:idCategorie and code_section=:code_section");
 			$stmt->bindParam(':name',$name);
 			$stmt->bindParam(':idCategorie',$id);
 			$stmt->bindParam(':code_section',$code_section);
@@ -182,7 +182,7 @@ class CategoryModel{
 	function updateContentCategories($id,$content,$code_section)
     {
 		try{
-			$stmt = $this->connexion->prepare("UPDATE categories SET content=:content WHERE idCategorie=:idCategorie and code_section=:code_section");
+			$stmt = $this->connexion->prepare("UPDATE survival_guide_categories SET content=:content WHERE idCategorie=:idCategorie and code_section=:code_section");
 			$stmt->bindParam(':content',$content);
 			$stmt->bindParam(':idCategorie',$id);			
 			$stmt->bindParam(':code_section',$code_section);
@@ -199,7 +199,7 @@ class CategoryModel{
 	try{
 
 
-            $stmt = $this->connexion->prepare("SELECT * from relation, categories WHERE code_section=:section and relation.idCategorie=categories.idCategorie order by partie ASC, chapitre ASC, position ASC");
+            $stmt = $this->connexion->prepare("SELECT * from survival_guide_relation, survival_guide_categories WHERE code_section=:section and survival_guide_relation.idCategorie=survival_guide_categories.idCategorie order by partie ASC, chapitre ASC, position ASC");
             $stmt->bindParam(':section',$section);
             $stmt->execute();
 

@@ -28,8 +28,9 @@ if (isset($user)){
 
 	$_SESSION['username'] = phpCAS::getUser();
 	$_SESSION['cas'] = true;
-	$_SESSION['code_section'] = phpCAS::getAttributes()['sc'];
-	header('Location: /ESN-BackEnd/index.php');  
+	$attributes = phpCAS::getAttributes();
+	$_SESSION['code_section']=$attributes['sc'];
+	header('Location: /survivalGuide/index.php');  
 }
 
 ?>

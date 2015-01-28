@@ -1,7 +1,7 @@
 --
 -- Insertion de quelques entrées, basé sur le guide de survie ESN Lille
 --
-INSERT INTO `categories` (`idCategorie`, `name`, `content`, `date`, `code_section`) VALUES
+INSERT INTO `survival_guide_categories` (`idCategorie`, `name`, `content`, `date`, `code_section`) VALUES
 (1, 'ESN Lille', '', '2015-01-06 15:02:50', 'FR-LILL-ESL'),
 (2, 'L''université', '', '2015-01-06 14:22:09', 'FR-LILL-ESL'),
 (3, 'Ton arrivée', '', '2014-12-26 21:09:50', 'FR-LILL-ESL'),
@@ -20,7 +20,7 @@ INSERT INTO `categories` (`idCategorie`, `name`, `content`, `date`, `code_sectio
 (17, 'ESN Lille 2', 'ESN Lille (Erasmus Student Network) est une association qui a pour missions d’accueillir et de faciliter l’intégration des étudiants internationaux, mais aussi de faire la promotion de la mobilité internationale. \r\n\r\nC’est pourquoi nous organisons des événements culturels, sportifs, festifs, et des voyages tout au long de l’année en vous mettant en contact avec les étudiants locaux Français. Cela permet de créer des liens et d’avoir une aide précieuse dès votre arrivée. Vous ne serez donc pas surpris de savoir que notre slogan est “Students helping students”. Nous vous proposerons ainsi de nombreuses activités qui vous correspondent dans un cadre non formel ! ', '2015-01-27 14:52:40', 'test');
 
 
-INSERT INTO `relation` (`idCategorie`, `partie`, `chapitre`, `position`) VALUES
+INSERT INTO `survival_guide_relation` (`idCategorie`, `partie`, `chapitre`, `position`) VALUES
 (1, 0, 0, 2),
 (2, 0, 0, 0),
 (3, 0, 0, 0),
