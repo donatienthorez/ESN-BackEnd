@@ -57,7 +57,6 @@
 		</div>
 	  </div>
 	</div>
-	<div class="subnavbar">
 		<?php
 		if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 		{
@@ -68,6 +67,5 @@
 			include 'includes/partials/login.php';
 		}
 		?>
-	</div>
 </body>
 </html>

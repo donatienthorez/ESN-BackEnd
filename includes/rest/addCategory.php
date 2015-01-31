@@ -2,14 +2,21 @@
 session_start();
 
 header('Content-Type: application/json; charset=utf-8');
-ini_set('display_errors', 1);
+
+// Annule les magic quotes si activées
+if(get_magic_quotes_gpc()){
+	function stripslashes_deep($value) {
+		return (is_array($value)) ? array_map('stripslashes_deep', $value) : stripslashes($value);
+	}
+	$_GET    = array_map('stripslashes_deep', $_GET);
+	$_POST   = array_map('stripslashes_deep', $_POST);
+	$_COOKIE = array_map('stripslashes_deep', $_COOKIE);
+}
+
 
 include '../database/Database.php';
 include '../entities/Category.php';
 include '../model/CategoryModel.php';
-
-
-echo "test";
 
 if(isset($_SESSION['username']) && isset($_SESSION['code_section']))
 {
